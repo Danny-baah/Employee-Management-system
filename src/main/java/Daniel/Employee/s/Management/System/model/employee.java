@@ -1,34 +1,38 @@
 package Daniel.Employee.s.Management.System.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
-/**
- * Represents an employee entity in the system.
- */
+
+ //Represents an employee entity in the system.
+
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Unique id for each employee
 
-    @Column(nullable = false)
+    @NotBlank(message = "Name is required")
     private String name; // Employee's name
 
-    @Column(nullable = false)
+    @NotBlank(message = "Sex is required")
     private String sex; // Employee's sex
 
+    @NotNull(message = "Date of birth is required")
     @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth; // Employee's date of birth
 
-    @Column(nullable = false)
+    @NotBlank(message = "Address is required")
     private String address; // Employee's address
 
-    @Column(nullable = false)
+    @Min(value = 0, message = "Age must be a positive number")
     private Integer age; // Employee's age
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
     @Column(nullable = false, unique = true)
     private String email; // Employee's email address
 
