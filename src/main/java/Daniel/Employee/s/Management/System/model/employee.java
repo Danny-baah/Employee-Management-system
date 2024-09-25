@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
-
- //Represents an employee entity in the system.
+// Represents an employee entity in the system
 
 @Entity
 @Table(name = "employees")
-public class Employee{
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +17,9 @@ public class Employee{
     @NotBlank(message = "Name is required")
     private String name; // Employee's name
 
-    @NotBlank(message = "Sex is required")
-    private String sex; // Employee's sex
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Sex is required")
+    private Sex sex; // Employee's sex (MALE/FEMALE)
 
     @NotNull(message = "Date of birth is required")
     @Column(name = "date_of_birth", nullable = false)
@@ -39,8 +39,8 @@ public class Employee{
     // Default constructor
     public Employee() {}
 
-    // Parameterized constructor
-    public Employee(String name, String sex, LocalDate dateOfBirth, String address, Integer age, String email) {
+    // Parameterized constructor (Updated sex parameter to enum Sex)
+    public Employee(String name, Sex sex, LocalDate dateOfBirth, String address, Integer age, String email) {
         this.name = name;
         this.sex = sex;
         this.dateOfBirth = dateOfBirth;
@@ -66,11 +66,11 @@ public class Employee{
         this.name = name;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -111,7 +111,7 @@ public class Employee{
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", sex='" + sex + '\'' +
+                ", sex=" + sex +
                 ", dateOfBirth=" + dateOfBirth +
                 ", address='" + address + '\'' +
                 ", age=" + age +
