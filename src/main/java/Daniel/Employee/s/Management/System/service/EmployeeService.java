@@ -5,18 +5,27 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    // Save a new employee
     Employee saveEmployee(Employee employee);
 
-    // Get a list of all employees
     List<Employee> getAllEmployees();
 
-    // Get an employee by ID
     Employee getEmployeeById(Long id);
 
-    // Update an existing employee
     Employee updateEmployee(Long id, Employee employeeDetails);
+    
+    boolean deleteEmployee(Long id);
 
-    // Delete an employee by ID
-    void deleteEmployee(Long id);
+    long countAllEmployees();
+
+    long countEmployeesBySex(String male);
+
+    long countAllActiveEmployees();
+
+    long countActiveEmployeesBySex(String male);
+
+    List<Employee> getAllActiveEmployees();
+
+    List<Employee> getAllInActiveEmployees();
+
+    void updateEmployee(Object employeeDetails);
 }

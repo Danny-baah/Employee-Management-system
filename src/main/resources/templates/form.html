@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Management Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            height: 100vh;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .btn{
+            width:200px
+        }
+        .add-btn{
+            width:100%
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<!-- Sidebar for actions -->
+<div class="sidebar">
+    <h2>Actions</h2>
+    <a th:href="@{/form}" class="btn btn-success btn-block">Add Employee</a>
+    <a th:href="@{/DeletedEmployees}" class="btn btn-info btn-block mt-3">Show Deleted Employees</a>
+</div>
+
+
+<!-- Content area -->
+<div class="content">
+    <h1>Add New Employee</h1>
+
+    <div th:if="${errorMessage}" style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <!-- Add Employee Form -->
+    <form th:action="@{/addEmployee}" th:object="${employee}" method="post" class="row">
+
+        <!-- First Name-->
+        <div class="form-group col-md-6">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" th:field="*{firstname}" autocomplete="off" required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group col-md-6">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" th:field="*{lastname}" autocomplete="off" required>
+        </div>
+
+
+        <!-- Age -->
+        <div class="form-group col-md-6">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age"  th:field="*{age}" required min="15" max="60"
+                   oninput="if(this.value.length > 2) this.value = this.value.slice(0,2);" >
+        </div>
+
+        <!-- Sex -->
+        <div class="form-group col-md-6">
+            <label for="sex">Sex</label>
+            <select class="form-control" id="sex"  th:field="*{sex}" required>
+                <option value="" disabled selected>Select your option</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group col-md-6">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input type="date" class="form-control" id="dateOfBirth"  th:field="*{dateOfBirth}" required  min="1970-01-01" max="2015-12-31">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email"  th:field="*{email}" autocomplete="off" required>
+        </div>
+
+
+        <!-- Address -->
+        <div class="form-group col-md-12">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address"  th:field="*{address}" required style="height: 50px;"></textarea>
+        </div>
+
+
+        <!-- Submit Button -->
+        <div class="form-group col-md-12">
+            <a href="/home"><button type="submit" class="btn btn-success btn-block add-btn">Add Employee</button>
+            </a>
+        </div>
+
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+</body>
+</html>

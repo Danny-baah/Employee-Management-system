@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Deleted Employees</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            height: 100vh;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .employee-table {
+            margin-top: 30px;
+            margin-bottom: 2px;
+        }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .table thead th {
+            position: sticky;
+            top: 0;
+            background-color: #343a40;
+            color: white;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar for actions -->
+<div class="sidebar">
+    <h2>Actions</h2>
+    <a th:href="@{/form}" class="btn btn-success btn-block">Add Employee</a>
+    <a th:href="@{/home}" class="btn btn-info btn-block mt-3">Back to Home</a>
+</div>
+
+<!-- Content area -->
+<div class="content">
+    <h1>Deleted Employees</h1>
+
+    <!-- Section to display deleted employees in table format -->
+    <div class="employee-table">
+        <h3>All Deleted Employees</h3>
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${deletedemployees}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.age}"></td>
+                    <td th:text="${employee.sex}"></td>
+                    <td th:text="${employee.address}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.dateOfBirth}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
